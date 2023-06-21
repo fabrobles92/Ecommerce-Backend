@@ -58,7 +58,8 @@ class CartItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
     total_price = serializers.SerializerMethodField()
 
-    def get_total_price(self, cart_item: CartItem):
+    
+    def get_total_price(self, cart_item: CartItem) -> Decimal:
         return cart_item.quantity * cart_item.product.unit_price
 
     class Meta:
@@ -71,7 +72,7 @@ class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
-    def get_total_price(self, cart):
+    def get_total_price(self, cart) -> Decimal:
         return sum([item.quantity * item.product.unit_price for item in cart.items.all()])
 
     class Meta:
