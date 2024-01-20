@@ -3,7 +3,7 @@
 /static/
 /playground/
 general.log
-/storefront/settings/dev.py
 /core/static/core/logo.svg
+**/__pycache__/
 
 
