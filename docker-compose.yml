@@ -5,6 +5,8 @@ services:
     command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
     ports:
       - 8000:8000
+    environment:
+      - AWS_PUBLIC_HOSTNAME=${AWS_PUBLIC_HOSTNAME}
     depends_on:
       - redis
       - mysql

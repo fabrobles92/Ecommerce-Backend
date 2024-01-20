@@ -65,6 +65,13 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8001',
 ]
 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+#Only for AWS
+AWS_PUBLIC_HOSTNAME = os.environ.get('AWS_PUBLIC_HOSTNAME') #Env variable needs to be set with bash command "ec2-metadata -p"
+if AWS_PUBLIC_HOSTNAME:
+    ALLOWED_HOSTS += [AWS_PUBLIC_HOSTNAME.split("public-hostname:")[1].strip()]
+
 ROOT_URLCONF = 'storefront.urls'
 
 TEMPLATES = [
@@ -196,6 +203,17 @@ LOGGING = {
         'verbose': {
             'format': '{asctime} ({levelname}) - {name} - {message}',
             'style': '{'
+        }
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/2',
+        'TIMEOUT': 10 * 60,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
