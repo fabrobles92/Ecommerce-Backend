@@ -2,7 +2,7 @@ version: '3.9'
 services:
   web:
     build: .
-    command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
+    command: bash wait-for-it.sh mysql:3306 -- bash docker-entrypoint.sh
     ports:
       - 8000:8000
     depends_on:

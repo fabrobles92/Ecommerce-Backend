@@ -1,7 +1,6 @@
 *.pyc
 /media/
 /static/
-/playground/
 general.log
 /core/static/core/logo.svg
 **/__pycache__/
